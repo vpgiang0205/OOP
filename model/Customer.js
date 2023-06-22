@@ -1,5 +1,10 @@
-import Person from "./Person";
+import Person from "./Person.js";
 
 export default class Customer extends Person {
-    super(){}
+    constructor(hoten, diachi, email, tenct, trigia, danhgia) {
+        super(hoten, diachi, email);
+        this.tenct = tenct;
+        this.trigia = trigia;
+        this.danhgia = danhgia;
+    }
 }
