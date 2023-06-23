@@ -22,13 +22,29 @@
   <body class="bg-dark text-white" onload="$('#modelId').modal('show')">
     <h1>Management System</h1>
 
-    <div class="container">
-      <div class="d-flex justify-content-end w-100">
+    <div class="container mt-5">
+      <div class="d-flex justify-content-end w-100 m-2">
+        <select id="filterLoai" onchange="filterByLoai()">
+          <option value="">All</option>
+          <option value="Customer">Customer</option>
+          <option value="Student">Student</option>
+          <option value="Employee">Employee</option>
+        </select>
+
+        <button
+          type="button"
+          class="btn btn-primary mx-3"
+          onclick="btnSort()"
+        >
+          A ~ Z
+        </button>
+
         <button
           type="button"
           class="btn btn-primary"
           data-toggle="modal"
           data-target="#modelId"
+          onclick="btnShowAdd()"
         >
           Add someone
         </button>
@@ -41,6 +57,7 @@
             <th>Họ tên</th>
             <th>Địa chỉ</th>
             <th>Email</th>
+            <th>Chức vụ</th>
             <th>Lương</th>
             <th>DTB</th>
             <th>Action</th>
@@ -61,7 +78,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content bg-dark">
             <div class="modal-header">
-              <h5 class="modal-title">Thêm</h5>
+              <h5 class="modal-title" id="title">MODEL</h5>
               <button
                 type="button"
                 class="close"
@@ -82,6 +99,7 @@
                     id="hoten"
                     aria-describedby="helpId"
                     placeholder=""
+                    required
                   />
                 </div>
 
@@ -94,22 +112,19 @@
                     id="diachi"
                     aria-describedby="helpId"
                     placeholder=""
+                    required
                   />
                 </div>
 
                 <div class="form-group">
-                  <label for="">Email:</label>
+                  <label for="email">Email:</label>
                   <input
-                    type="text"
+                    type="email"
                     class="form-control"
-                    name=""
                     id="email"
-                    aria-describedby="helpId"
-                    placeholder=""
+                    required
                   />
                 </div>
-
-               
 
                 <div class="form-group">
                   <label for="">Phân loại:</label>
@@ -128,7 +143,7 @@
                 </div>
 
                 <!-- Hidden -->
-                 <div style="display: none;" id="hiddenCustomer">
+                <div style="display: none" id="hiddenCustomer">
                   <div class="form-group">
                     <label for="">Tên công ty:</label>
                     <input
@@ -164,10 +179,9 @@
                       placeholder=""
                     />
                   </div>
-
                 </div>
 
-                 <div style="display: none;" id="hiddenEmployee">
+                <div style="display: none" id="hiddenEmployee">
                   <div class="form-group">
                     <label for="">Số ngày làm việc:</label>
                     <input
@@ -193,7 +207,7 @@
                   </div>
                 </div>
 
-                 <div style="display: none;" id="hiddenStudent">
+                <div style="display: none" id="hiddenStudent">
                   <div class="form-group">
                     <label for="">Toán:</label>
                     <input
@@ -230,8 +244,6 @@
                     />
                   </div>
                 </div>
-
-
               </div>
             </div>
             <div class="modal-footer">
@@ -242,17 +254,30 @@
               >
                 Close
               </button>
-              <button type="button" onclick="addBtn()" class="btn btn-primary">
+              <button
+                type="button"
+                onclick="addBtn()"
+                id="addBtn"
+                class="btn btn-primary"
+              >
                 Add
+              </button>
+              <button
+                type="button"
+                value=""
+                onclick="editBtn(value)"
+                id="editBtn"
+                style="display: none"
+                class="btn btn-primary"
+              >
+                Edit
               </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <button id="backToTopBtn" class="btn btn-primary" title="Back to Top">
-      &#8679;
-    </button>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

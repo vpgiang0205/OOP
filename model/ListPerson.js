@@ -22,5 +22,20 @@ export default class ListPerson {
             console.log(this.arr);
         }
     }
+    sortAZ(){
+        let mangTheoChuCai = this.arr.sort((a, b) => {
+            let tenA = a.hoten.toLowerCase();
+            let tenB = b.hoten.toLowerCase();
 
+            if (tenA < tenB) {
+                return -1; // Đẩy 'a' lên trước 'b'
+            } else if (tenA > tenB) {
+                return 1; // Đẩy 'b' lên trước 'a'
+            } else {
+                return 0; // Giữ nguyên vị trí
+            }
+        });
+        return mangTheoChuCai
+    }
 }
+
