@@ -35,12 +35,14 @@
       </div>
       <!-- Button trigger modal -->
 
-      <table class="table bg-white">
+      <table class="table bg-white text-center">
         <thead>
           <tr>
             <th>Họ tên</th>
             <th>Địa chỉ</th>
             <th>Email</th>
+            <th>Lương</th>
+            <th>DTB</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -142,7 +144,7 @@
                   <div class="form-group">
                     <label for="">Trị giá hóa đơn:</label>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       name=""
                       id="trigia"
@@ -169,7 +171,7 @@
                   <div class="form-group">
                     <label for="">Số ngày làm việc:</label>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       name=""
                       id="ngaylamviec"
@@ -181,7 +183,7 @@
                   <div class="form-group">
                     <label for="">Lương theo ngày:</label>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       name=""
                       id="luongtheongay"
@@ -195,7 +197,7 @@
                   <div class="form-group">
                     <label for="">Toán:</label>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       name=""
                       id="toan"
@@ -207,7 +209,7 @@
                   <div class="form-group">
                     <label for="">Lý:</label>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       name=""
                       id="ly"
@@ -219,7 +221,7 @@
                   <div class="form-group">
                     <label for="">Hóa:</label>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       name=""
                       id="hoa"
@@ -274,26 +276,6 @@
         var button = $(event.relatedTarget);
         var modal = $(this);
         // Use above variables to manipulate the DOM
-      });
-    </script>
-
-    <script>
-      // JS
-      $(document).ready(function () {
-        // Hiển thị nút back to top khi cuộn xuống dưới
-        $(window).scroll(function () {
-          if ($(this).scrollTop() > 200) {
-            $("#backToTopBtn").fadeIn();
-          } else {
-            $("#backToTopBtn").fadeOut();
-          }
-        });
-
-        // Xử lý sự kiện click nút back to top
-        $("#backToTopBtn").click(function () {
-          $("html, body").animate({ scrollTop: 0 }, 500);
-          return false;
-        });
       });
     </script>
     <script type="module" src="../controllers/main.js"></script>

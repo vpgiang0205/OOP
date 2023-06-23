@@ -9,55 +9,60 @@ const listPerson = new ListPerson();
 
 const getEle = (id) => document.getElementById(id);
 
+let nextId = 1;
 function getPerson() {
     console.log(statedef)
     let hoten = getEle('hoten').value;
     let diachi = getEle('diachi').value;
     let email = getEle('email').value;
 
-    
+    let id = nextId++;
     if (statedef == 'Customer') {
         let tenct = getEle('tenct').value
-        let trigia = getEle('trigia').value
+        let trigia = getEle('trigia').value * 1
         let danhgia = getEle('danhgia').value
-        
-        const customer = new Customer(tenct, trigia, danhgia);
-
+        const customer = new Customer(id, hoten, diachi, email, tenct, trigia, danhgia);
         console.log(customer);
         return customer;
 
     }
     if (statedef == 'Student') {
-        let toan = getEle('toan').value
-        let ly = getEle('ly').value
-        let hoa = getEle('hoa').value
-        const student = new Student(toan, ly, hoa)
-        chucvu.push(student)
-        console.log(person)
+        let toan = getEle('toan').value * 1
+        let ly = getEle('ly').value * 1
+        let hoa = getEle('hoa').value * 1
+        const student = new Student(id, hoten, diachi, email, toan, ly, hoa)
+        console.log(student);
+        student.tinhDTB();
+        return student;
 
     }
     if (statedef == 'Employee') {
-        let ngaylamviec = getEle('ngaylamviec').value
-        let luongtheongay = getEle('luongtheongay').value
-        const employee = new Employee(ngaylamviec, luongtheongay)
+        let ngaylamviec = getEle('ngaylamviec').value * 1
+        let luongtheongay = getEle('luongtheongay').value * 1
+        const employee = new Employee(id, hoten, diachi, email, ngaylamviec, luongtheongay)
         console.log(employee)
+        employee.tinhLuong();
+        return employee;
     }
-    const person = new Person(hoten, diachi, email);
-    console.log(person);
-    return person;
 }
 
 function renderPerson(data) {
     let content = ""; // Accumulate the content outside the loop
     for (let i = 0; i < data.length; i++) {
         let eachperson = data[i];
+        let luong = eachperson.luong !== undefined ? eachperson.luong : "N/A";
+
+        let dtb = eachperson.dtb || "N/A";
         content += `
       <tr>
         <td>${eachperson.hoten}</td>
         <td>${eachperson.diachi}</td>
         <td>${eachperson.email}</td>
+        <td>${luong}</td>
+        <td>${dtb}</td>
         <td>
-        <button class="btn btn-info" onclick="btnDelete('${eachperson.email}')">Delete</button></td>
+        <button class="btn btn-info" onclick="btnEdit('${eachperson.id}')">Edit</button>
+        <button class="btn btn-danger" onclick="btnDelete('${eachperson.id}')">Delete</button></td>
       </tr>
     `;
     }
@@ -86,7 +91,6 @@ window.showMoreOption = (value) => {
             getEle('hiddenEmployee').style.display = 'block';
             statedef = "Employee"
         }
-
     }
     else {
         getEle('hiddenEmployee').style.display = 'none';
@@ -98,8 +102,8 @@ window.showMoreOption = (value) => {
 
 
 // Button: Delete
-window.btnDelete = (email) => {
-    listPerson.deletePerson(email)
+window.btnDelete = (id) => {
+    listPerson.deletePerson(id)
     setLocalStorage();
     renderPerson(listPerson.arr);
 }
